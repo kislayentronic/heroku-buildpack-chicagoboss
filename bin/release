@@ -7,6 +7,12 @@ config_vars:
   HEROKU: true
 addons:
   - heroku-postgresql:dev
-default_process_types:
-  web: ./start
 EOF
+
+
+if [ ! -f $BUILD_DIR/Procfile ]; then
+cat <<EOF
+default_process_types:
+web: bash -i /app/init-dev.sh
+EOF
+fi
