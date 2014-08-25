@@ -6,3 +6,4 @@
 #echo "Starting Chicago Boss application on port $PORT"
 #exec erl +K true +P 32768 -pa /app/deps/*/ebin -pa /app/deps/elixir/lib/*/ebin -pa /app/ebin -noshell -boot start_sasl -config boss -s boss
 
+echo "This is my startscript $1"
