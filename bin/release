@@ -13,6 +13,6 @@ EOF
 if [ ! -f $BUILD_DIR/Procfile ]; then
 cat <<EOF
 default_process_types:
-web: bash -i /app/init-dev.sh
+web: ./init-dev.sh
 EOF
 fi

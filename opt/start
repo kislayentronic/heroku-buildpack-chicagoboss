@@ -1,9 +1,11 @@
 #!/bin/bash
 
-#echo "Configuring database connection and admin password from enviromnent"
-#./cb_config boss.config boss.config
-
-#echo "Starting Chicago Boss application on port $PORT"
-#exec erl +K true +P 32768 -pa /app/deps/*/ebin -pa /app/deps/elixir/lib/*/ebin -pa /app/ebin -noshell -boot start_sasl -config boss -s boss
-
-echo "This is my startscript $1"
+export HOME=/app
+for file in /app/.profile.d/*; do source $file; done
+hash -r
+cd /app
+if [[ -f Procfile ]]; then
+    bash -i $( ruby -e "require 'yaml';puts YAML.load_file('Procfile')['$1']" )
+else
+    bash -i $( ruby -e "require 'yaml';puts (YAML.load_file('.release')['default_process_types'] || {})['$1']")
+fi
